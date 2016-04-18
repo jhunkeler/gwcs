@@ -11,6 +11,8 @@ from __future__ import absolute_import, division, unicode_literals, print_functi
 # should keep this content at the top.
 # ----------------------------------------------------------------------------
 from ._astropy_init import *
+from .version_relic import *
+__githash__ = __version_commit__
 # ----------------------------------------------------------------------------
 
 

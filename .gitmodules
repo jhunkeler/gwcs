@@ -1,3 +1,6 @@
 [submodule "astropy-helpers"]
 	path = astropy_helpers
 	url = https://github.com/astropy/astropy-helpers.git
+[submodule "relic"]
+	path = relic
+	url = https://github.com/jhunkeler/relic.git

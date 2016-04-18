@@ -8,6 +8,14 @@ import sys
 import ah_bootstrap
 from setuptools import setup
 
+sys.path.insert(1, 'relic')
+import relic.release
+
+# Automatically drop 'v' prefix on version data
+version = relic.release.get_info(remove_pattern='v')
+# Write version data to gwcs/version_relic.py; gwcs/version.py already exists
+relic.release.write_template(version, 'gwcs', filename='version_relic.py')
+
 #A dirty hack to get around some early import/configurations ambiguities
 if sys.version_info[0] >= 3:
     import builtins
@@ -17,7 +25,6 @@ builtins._ASTROPY_SETUP_ = True
 
 from astropy_helpers.setup_helpers import (
     register_commands, adjust_compiler, get_debug_option, get_package_info)
-from astropy_helpers.git_helpers import get_git_devstr
 from astropy_helpers.version_helpers import generate_version_py
 
 # Get some values from the setup.cfg
@@ -43,13 +50,10 @@ LONG_DESCRIPTION = package.__doc__
 builtins._ASTROPY_PACKAGE_NAME_ = PACKAGENAME
 
 # VERSION should be PEP386 compatible (http://www.python.org/dev/peps/pep-0386)
-VERSION = '0.6.dev'
+VERSION = version.pep386
 
 # Indicates if this version is a release version
 RELEASE = 'dev' not in VERSION
-
-if not RELEASE:
-    VERSION += get_git_devstr(False)
 
 # Populate the dict of setup command overrides; this should be done before
 # invoking any other functionality from distutils since it can potentially

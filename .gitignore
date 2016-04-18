@@ -10,10 +10,12 @@ __pycache__
 *.c
 
 # Other generated files
+*/version_relic.py
 */version.py
 */cython_version.py
 htmlcov
 .coverage
+RELIC-INFO
 MANIFEST
 
 # Sphinx
